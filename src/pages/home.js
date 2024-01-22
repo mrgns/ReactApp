@@ -24,7 +24,7 @@ export default function Home() {
                             <th scope="col">Name</th>
                             <th scope="col">Company</th>
                             <th scope="col">price</th>
-                            <th scope="col">In Stocked</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,11 @@ export default function Home() {
                                 <td>{product.name}</td>
                                 <td>{product.company}</td>
                                 <td>{product.price}</td>
-                                <td>{product.inStocked}</td>
+                                <td>
+                                    <button className='btn btn-outline-dark btn-primary mx-2'>View</button>
+                                    <button className='btn btn-outline-dark btn-secondary mx-2'>Edit</button>
+                                    <button className='btn btn-outline-dark btn-danger mx-2'>Delete</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
