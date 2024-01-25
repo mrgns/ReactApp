@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -11,7 +12,6 @@ export default function Home() {
     const loadProducts = async () => {
         const result = await axios.get("http://localhost:8080/react/api/v1/product/all");
         setProducts(result.data.DATA);
-        console.log(result.data.DATA)
     };
 
     return (
@@ -35,8 +35,8 @@ export default function Home() {
                                 <td>{product.company}</td>
                                 <td>{product.price}</td>
                                 <td>
-                                    <button className='btn btn-outline-dark btn-primary mx-2'>View</button>
-                                    <button className='btn btn-outline-dark btn-secondary mx-2'>Edit</button>
+                                    <button className='btn btn-outline-dark btn-primary mx-2' >View</button>
+                                    <Link className='btn btn-outline-dark btn-secondary mx-2' to={`editProduct/${product.productId}`}>Edit</Link>
                                     <button className='btn btn-outline-dark btn-danger mx-2'>Delete</button>
                                 </td>
                             </tr>
