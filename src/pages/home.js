@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
-
     useEffect(() => {
         loadProducts();
     }, []);
@@ -13,6 +12,11 @@ export default function Home() {
         const result = await axios.get("http://localhost:8080/react/api/v1/product/all");
         setProducts(result.data.DATA);
     };
+
+    const deleteProduct = async(id) =>{
+        await axios.delete(`http://localhost:8080/react/api/v1/product/delete/${id}`)
+        loadProducts()
+    }
 
     return (
         <div className='container'>
@@ -35,9 +39,9 @@ export default function Home() {
                                 <td>{product.company}</td>
                                 <td>{product.price}</td>
                                 <td>
-                                    <button className='btn btn-outline-dark btn-primary mx-2' >View</button>
+                                    <Link className='btn btn-outline-dark btn-primary mx-2' to={`viewProduct/${product.productId}`}>View</Link>
                                     <Link className='btn btn-outline-dark btn-secondary mx-2' to={`editProduct/${product.productId}`}>Edit</Link>
-                                    <button className='btn btn-outline-dark btn-danger mx-2'>Delete</button>
+                                    <Link className='btn btn-outline-dark btn-danger mx-2' onClick={() => deleteProduct(product.productId)}>Delete</Link>
                                 </td>
                             </tr>
                         ))}
